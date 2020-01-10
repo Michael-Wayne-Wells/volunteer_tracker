@@ -77,6 +77,7 @@ describe 'the volunteer detail page path', {:type => :feature} do
     expect(page).not_to have_content('Jasmine')
   end
 end
+
 describe 'input fields from injection', {:type => :feature} do
   it 'does not allow special characters or ending or begining with spaces' do
     visit '/'
