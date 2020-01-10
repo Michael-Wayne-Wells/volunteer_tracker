@@ -15,4 +15,16 @@ class Project
   def ==(other_project)
     self.title.eql?(other_project.title) && self.id.eql?(other_project.id)
   end
+
+  def self.all
+    results = DB.exec("SELECT * FROM projects;")
+    projects = []
+    results.each do |result|
+      id = result.fetch("id").to_i
+      title = result.fetch("title")
+      projects.push(Project.new({:id => id, :title => title}))
+    end
+    projects
+  end
+
 end
