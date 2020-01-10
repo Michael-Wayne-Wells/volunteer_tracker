@@ -10,5 +10,23 @@ DB = PG.connect({:dbname => "volunteer_tracker"})
 also_reload('lib/**/*.rb')
 
 get("/") do
-  erb(:index)
+  redirect to("/projects")
+end
+
+get("/projects") do
+  projects = Project.all
+  unless projects.nil?
+    @projects = projects
+  else
+    @projects = []
+  end
+  erb(:projects)
+end
+
+post("/projects") do
+ title = params[:title]
+ project = Project.new({:title => title, :id => nil})
+ project.save
+ redirect to("/projects")
+
 end
