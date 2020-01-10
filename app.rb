@@ -23,8 +23,8 @@ get("/projects") do
 end
 
 post("/projects") do
-  if params[:title] =~ /^[a-z0-9\_\-]+\s?[a-z0-9\_\-]+$/i
-    project = Project.new({:title => title, :id => nil})
+  if params[:title] =~ /^[a-z0-9\_\-]+\s?[+\s?a-z0-9\_\-]*\w$/i
+    project = Project.new({:title => params[:title], :id => nil})
     project.save
     redirect to("/projects")
   else
@@ -33,7 +33,8 @@ post("/projects") do
 end
 
 get('/projects/:id') do
-  @project = Project.find(params[:id].to_i)
+  id = params[:id]
+  @project = Project.find(id.to_i)
   @volunteers = @project.volunteers
   @show = params[:show]
   erb(:project)
@@ -48,7 +49,7 @@ end
 post("/projects/:id/volunteers/") do
   @project = Project.find(params[:id].to_i)
   vol_name = params[:vol_name]
-  if vol_name =~ /^[a-z0-9\_\-]+\s?[a-z0-9\_\-]+$/i
+  if vol_name =~ /^[a-z0-9\_\-]+\s?[+\s?a-z0-9\_\-]*\w$/i
     volunteer = (Volunteer.new({:name => vol_name, :project_id => @project.id, :id => nil}))
     volunteer.save
     @volunteers = @project.volunteers
@@ -63,14 +64,18 @@ delete("/projects/:id/volunteers/:volunteer_id") do
 end
 get('/projects/:id/edit') do
   @show = true
+  @project = Project.find(params[:id].to_i)
+  @volunteers = @project.volunteers
   erb(:project)
 end
 
 patch('/projects/:id') do
-  @project = Project.find(params[:id].to_i)
-  if params[:title] =~ /^[a-z0-9\_\-]+\s?[a-z0-9\_\-]+$/i
-    @project.update({:title => params[:title], :id => nil})
+  project = Project.find(params[:id].to_i)
+  if params[:title] =~ /^[a-z0-9\_\-]+\s?[+\s?a-z0-9\_\-]*\w$/i
+    project.update({:title => params[:title], :id => nil})
     @show = false
+    @project = Project.find(params[:id].to_i)
+    @volunteers = @project.volunteers
     erb(:project)
   else
     erb(:error)
