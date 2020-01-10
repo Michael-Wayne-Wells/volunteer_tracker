@@ -50,7 +50,8 @@ get("/projects/:id/volunteers/:volunteer_id") do
   erb(:volunteer)
 end
 patch("/projects/:id/volunteers/:volunteer_id") do
-
+  vol_name = params[:name]
+  
 end
 
 post("/projects/:id/volunteers/") do
