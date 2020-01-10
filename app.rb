@@ -44,14 +44,19 @@ get('/projects/:id') do
   @show = params[:show]
   erb(:project)
 end
+
 get("/projects/:id/volunteers/:volunteer_id") do
   @volunteer = Volunteer.find(params[:volunteer_id])
   @project = Project.find(params[:id])
   erb(:volunteer)
 end
+
 patch("/projects/:id/volunteers/:volunteer_id") do
-  vol_name = params[:name]
-  
+  volunteer = Volunteer.find(params[:volunteer_id])
+  volunteer.update({:name => params[:name], :project_id => nil, :id => nil})
+  @project = Project.find(params[:id])
+  @volunteers = @project.volunteers
+  erb(:project)
 end
 
 post("/projects/:id/volunteers/") do
