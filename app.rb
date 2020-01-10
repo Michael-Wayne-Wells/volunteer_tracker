@@ -1,3 +1,4 @@
+
 require('sinatra')
 require('sinatra/reloader')
 require('pry')
@@ -45,6 +46,35 @@ get('/projects/:id') do
   erb(:project)
 end
 
+
+
+get('/projects/:id/edit') do
+  @show = true
+  @project = Project.find(params[:id].to_i)
+  @volunteers = @project.volunteers
+  erb(:project)
+end
+
+patch('/projects/:id') do
+  project = Project.find(params[:id].to_i)
+  if params[:title] =~ /^[a-z0-9\_\-]+\s?[+\s?a-z0-9\_\-]*\w$/i
+    project.update({:title => params[:title], :id => nil})
+    @show = false
+    @project = Project.find(params[:id].to_i)
+    @volunteers = @project.volunteers
+    erb(:project)
+  else
+    erb(:error)
+  end
+end
+
+delete('/projects/:id') do
+  project = Project.find(params[:id].to_i)
+  project.delete
+  @projects = Project.all
+  erb(:projects)
+end
+
 get("/projects/:id/volunteers/:volunteer_id") do
   @volunteer = Volunteer.find(params[:volunteer_id])
   @project = Project.find(params[:id])
@@ -73,31 +103,9 @@ post("/projects/:id/volunteers/") do
 end
 
 delete("/projects/:id/volunteers/:volunteer_id") do
-
-end
-get('/projects/:id/edit') do
-  @show = true
+  volunteer = Volunteer.find(params[:volunteer_id].to_i)
+  volunteer.delete
   @project = Project.find(params[:id].to_i)
   @volunteers = @project.volunteers
   erb(:project)
-end
-
-patch('/projects/:id') do
-  project = Project.find(params[:id].to_i)
-  if params[:title] =~ /^[a-z0-9\_\-]+\s?[+\s?a-z0-9\_\-]*\w$/i
-    project.update({:title => params[:title], :id => nil})
-    @show = false
-    @project = Project.find(params[:id].to_i)
-    @volunteers = @project.volunteers
-    erb(:project)
-  else
-    erb(:error)
-  end
-end
-
-delete('/projects/:id') do
-  project = Project.find(params[:id].to_i)
-  project.delete
-  @projects = Project.all
-  erb(:projects)
 end
