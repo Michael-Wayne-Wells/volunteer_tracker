@@ -35,4 +35,5 @@ class Volunteer
     name = result.fetch("name")
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
+  
 end
