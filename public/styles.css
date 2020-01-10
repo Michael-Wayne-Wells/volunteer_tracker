@@ -1,0 +1,13 @@
+.footer {
+  position: sticky;
+  bottom: 10%;
+  left: 10%;
+}
+.header {
+  padding-left: 10%;
+  padding-right: 10%;
+  width: 80%;
+  border: 4px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
