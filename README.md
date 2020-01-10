@@ -24,10 +24,13 @@ navigate to project folder and install gem bundles
 
 >$ cd volunteer_tracker $ gem install bundler $ bundle install
 
-start postgres and duplicate database
+start postgres(if not already) and duplicate database
 
 >$ createdb volunteer_tracker
 >$ psql volunteer_tracker < database_backup.sql
+>$ postgres
+>$ psql
+
 run program script in terminal
 
 >$ ruby app.rb
@@ -49,7 +52,7 @@ _This program utilized:_
 * _Sinatra_
 * _HTML_
 * _Heroku_
-* postgres
+* _postgres_
 
 _and was built on Atom_
 
