@@ -35,10 +35,20 @@ get('/projects/:id') do
   @show = params[:show]
   erb(:project)
 end
+get('/projects/:id/edit') do
+  @project = Project.find(params[:id].to_i)
+  @show = true
+  erb(:project)
+end
 
 patch('/projects/:id') do
   @project = Project.find(params[:id].to_i)
   @project.update({:title => params[:title], :id => nil})
   @show = false
   erb(:project)
+end
+delete('/projects/:id') do
+  project = Project.find(params[:id].to_i)
+  project.delete
+  erb(:projects)
 end
