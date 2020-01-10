@@ -8,5 +8,9 @@ def initialize(attributes)
   @id = attributes.fetch(:id)
 end
 
+def ==(other_volunteer)
+  (self.name == other_volunteer.name) && (self.id == other_volunteer.id)
+end
+
 
 end
