@@ -28,5 +28,17 @@ post("/projects") do
  project = Project.new({:title => title, :id => nil})
  project.save
  redirect to("/projects")
+end
 
+get('/projects/:id') do
+  @project = Project.find(params[:id].to_i)
+  @show = params[:show]
+  erb(:project)
+end
+
+patch('/projects/:id') do
+  @project = Project.find(params[:id].to_i)
+  @project.update({:title => params[:title], :id => nil})
+  @show = false
+  erb(:project)
 end
