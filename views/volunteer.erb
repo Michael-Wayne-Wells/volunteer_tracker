@@ -1,0 +1,8 @@
+<h2>Volunteer: <%= @volunteer.name %></h2>
+
+<form action="/projects/<%= @project.id %>/volunteers/<%= @volunteer.id %>" method="post">
+  <label>Update volunteer name:</label>
+  <input name="_method" type="hidden" value="patch">
+  <input type="text" name="name" placeholder="name">
+  <button type="submit" class="btn btn-dark">Update Volunteer</button>
+</form>

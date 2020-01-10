@@ -7,9 +7,14 @@ require('pg')
 
 DB = PG.connect({:dbname => "volunteer_tracker"})
 also_reload('lib/**/*.rb')
+set :show_exceptions, false
 
 get("/") do
   redirect to("/projects")
+end
+
+error 404,500 do
+  erb(:error)
 end
 
 get("/projects") do
@@ -40,7 +45,9 @@ get('/projects/:id') do
   erb(:project)
 end
 get("/projects/:id/volunteers/:volunteer_id") do
-
+  @volunteer = Volunteer.find(params[:volunteer_id])
+  @project = Project.find(params[:id])
+  erb(:volunteer)
 end
 patch("/projects/:id/volunteers/:volunteer_id") do
 
