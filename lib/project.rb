@@ -24,7 +24,7 @@ class Project
       title = result.fetch("title")
       projects.push(Project.new({:id => id, :title => title}))
     end
-    projects
+    projects.sort_by { |k| k.title }
   end
 
   def self.find(id)
