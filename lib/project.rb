@@ -44,6 +44,17 @@ class Project
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
     DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};")
   end
+  
+  def self.search(search)
+    project_results = []
+    results = DB.exec("SELECT * FROM projects WHERE title ILIKE '%#{search}%';")
+    results.each do |result|
+      id = results.first().fetch("id").to_i
+      title = results.first().fetch("title")
+      project_results.push(Project.new({:id => id, :title => title}))
+    end
+    project_results
+  end
 
   def volunteers
     results = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id}")
@@ -53,7 +64,7 @@ class Project
       id = result.fetch("id").to_i
       volunteers.push(Volunteer.new({:name => name, :project_id => @id, :id => id}))
     end
-      volunteers
+    volunteers
   end
 
 end
