@@ -26,7 +26,7 @@ class Volunteer
       id = result.fetch("id").to_i
       volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => id}))
     end
-    volunteers
+    volunteers.sort_by { |k| k.name }
   end
 
   def self.find(id)
