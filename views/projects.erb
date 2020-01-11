@@ -9,12 +9,14 @@
 <% if @projects.any? %>
   <h3>Projects:</h3>
   <ul>
-  <% @projects.each do |project| %>
-    <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
-  <% end %>
+    <% @projects.each do |project| %>
+      <li>
+        <a href="/projects/<%= project.id %>"><%= project.title %></a>
+      </li>
+    <% end %>
   </ul>
-  <% else %>
-    <h3>There are no projects yet!</h3>
+<% else %>
+  <h3>There are no projects yet!</h3>
 <% end %>
 <form class="form-display" action="/projects" method="post">
   <label>Create a new project:</label>

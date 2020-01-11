@@ -64,12 +64,12 @@ describe Volunteer do
     end
   end
 
-    context '#delete' do
-      it 'allows a user to delete a volunteer from a project' do
-        volunteer = Volunteer.new({:name => 'Jim', :project_id => 1, :id => nil})
-        volunteer.save
-        volunteer.delete
-      end
+  context '#delete' do
+    it 'allows a user to delete a volunteer from a project' do
+      volunteer = Volunteer.new({:name => 'Jim', :project_id => 1, :id => nil})
+      volunteer.save
+      volunteer.delete
+    end
   end
 
   describe '.search' do

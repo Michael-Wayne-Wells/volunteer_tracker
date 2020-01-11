@@ -44,7 +44,7 @@ class Project
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
     DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};")
   end
-  
+
   def self.search(search)
     project_results = []
     results = DB.exec("SELECT * FROM projects WHERE title ILIKE '%#{search}%';")

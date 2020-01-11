@@ -1,18 +1,18 @@
 
-  # _Volunteer Tracker_
+# _Volunteer Tracker_
 
-  #### _Manage Project and Volunteers_
+#### _Manage Project and Volunteers_
 
-  #### By _**Michael Wells**_
+#### By _**Michael Wells**_
 
-  ## Description
-  This application provides a resources for users to:
-  * Add, edit, and delete projects to sql database
-  * Add, edit, and delete volunteers associated with projects to database
+## Description
+This application provides a resources for users to:
+* Add, edit, and delete projects to sql database
+* Add, edit, and delete volunteers associated with projects to database
+* Search for users or projects by name or title
 
-  ## Setup/Installation Requirements
 
-  Visit the Heroku deployment:
+## Setup/Installation Requirements
 
 
 clone and open the file locally
@@ -51,7 +51,6 @@ _This program utilized:_
 * _RUBY_
 * _Sinatra_
 * _HTML_
-* _Heroku_
 * _postgres_
 
 _and was built on Atom_
@@ -60,4 +59,4 @@ _and was built on Atom_
 
 *Licensed under MIT license*
 
-Copyright (c) 2019 **_Michael Wells_**
+Copyright (c) 2020 **_Michael Wells_**
