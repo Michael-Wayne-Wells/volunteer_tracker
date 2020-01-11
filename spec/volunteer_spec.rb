@@ -69,8 +69,19 @@ describe Volunteer do
         volunteer = Volunteer.new({:name => 'Jim', :project_id => 1, :id => nil})
         volunteer.save
         volunteer.delete
-
       end
+  end
+
+  describe '.search' do
+    it 'search by name' do
+      volunteer1 = volunteer.new({:name => 'Jane', :id => nil})
+      volunteer1.save
+      volunteer2 = volunteer.new({:name => 'Adam', :id => nil})
+      volunteer2.save
+      volunteer3 = volunteer.new({:name => 'Tony', :id => nil})
+      volunteer3.save
+      expect(volunteer.search("tony")).to eq [volunteer3]
+    end
   end
 
   describe '.all' do
