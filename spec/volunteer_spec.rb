@@ -74,18 +74,18 @@ describe Volunteer do
 
   describe '.search' do
     it 'search by name' do
-      volunteer1 = volunteer.new({:name => 'Jane', :id => nil})
+      volunteer1 = Volunteer.new({:name => 'Jane', :project_id => 1, :id => nil})
       volunteer1.save
-      volunteer2 = volunteer.new({:name => 'Adam', :id => nil})
+      volunteer2 = Volunteer.new({:name => 'Adam', :project_id => 2, :id => nil})
       volunteer2.save
-      volunteer3 = volunteer.new({:name => 'Tony', :id => nil})
+      volunteer3 = Volunteer.new({:name => 'Tony', :project_id => 3, :id => nil})
       volunteer3.save
-      expect(volunteer.search("tony")).to eq [volunteer3]
+      expect(Volunteer.search("tony")).to eq [volunteer3]
     end
   end
 
   describe '.all' do
-    it 'sor by name' do
+    it 'sort by name' do
       volunteer1 = Volunteer.new({:name => 'Jane', :project_id => 1, :id => nil})
       volunteer1.save
       volunteer2 = Volunteer.new({:name => 'Adam', :project_id => 2, :id => nil})

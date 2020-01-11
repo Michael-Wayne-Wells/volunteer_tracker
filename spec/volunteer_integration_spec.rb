@@ -86,3 +86,22 @@ describe 'input fields from injection', {:type => :feature} do
     expect(page).to have_content("This isn't the page you're looking for...")
   end
 end
+
+describe 'the project and volunteer search', {:type => :feature} do
+  it 'returns results based on search string' do
+    test_project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+    test_project.save
+    project_id = test_project.id.to_i
+    test_volunteer = Volunteer.new({:name => 'Jasmine', :project_id => project_id, :id => nil})
+    test_volunteer.save
+    test_project2 = Project.new({:title => 'Teaching Kids ruby', :id => nil})
+    test_project2.save
+    project2_id = test_project2.id.to_i
+    test_volunteer2 = Volunteer.new({:name => 'Jake', :project_id => project2_id, :id => nil})
+    test_volunteer2.save
+    visit '/'
+    fill_in('search', :with => 'jake')
+    click_button('Search')
+    expect(page).to have_content('Jake')
+  end
+end
