@@ -69,8 +69,20 @@ describe Volunteer do
         volunteer = Volunteer.new({:name => 'Jim', :project_id => 1, :id => nil})
         volunteer.save
         volunteer.delete
-        expect(Volunteer.all).to eq []
+
       end
+  end
+
+  describe '.all' do
+    it 'sor by name' do
+      volunteer1 = Volunteer.new({:name => 'Jane', :project_id => 1, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Adam', :project_id => 2, :id => nil})
+      volunteer2.save
+      volunteer3 = Volunteer.new({:name => 'Tony', :project_id => 3, :id => nil})
+      volunteer3.save
+      expect(Volunteer.all).to eq [volunteer2, volunteer1, volunteer3]
+    end
   end
 
 end
