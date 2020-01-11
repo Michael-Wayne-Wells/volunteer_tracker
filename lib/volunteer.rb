@@ -43,6 +43,18 @@ class Volunteer
     end
   end
 
+  def self.search(search)
+    volunteer_results = []
+    results = DB.exec("SELECT * FROM volunteers WHERE name ILIKE '%#{search}%';")
+    results.each do |result|
+      id = results.first().fetch("id").to_i
+      project_id = results.first().fetch("project_id").to_i
+      name = results.first().fetch("name")
+      volunteer_results.push(Volunteer.new({:id => id, :project_id => project_id, :name => name}))
+    end
+    volunteer_results
+  end
+
   def delete
     DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
 
