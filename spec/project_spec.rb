@@ -93,4 +93,16 @@ describe Project do
       expect(Volunteer.all).to eq []
     end
   end
+
+  describe '.all' do
+    it 'sort by title' do
+      project1 = Project.new({:title => 'Jane', :id => nil})
+      project1.save
+      project2 = Project.new({:title => 'Adam', :id => nil})
+      project2.save
+      project3 = Project.new({:title => 'Tony', :id => nil})
+      project3.save
+      expect(Project.all).to eq [project2, project1, project3]
+    end
+  end
 end
