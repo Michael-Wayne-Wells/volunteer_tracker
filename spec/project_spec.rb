@@ -94,6 +94,18 @@ describe Project do
     end
   end
 
+  describe '.search' do
+    it 'search by title' do
+      project1 = Project.new({:title => 'Jane', :id => nil})
+      project1.save
+      project2 = Project.new({:title => 'Adam', :id => nil})
+      project2.save
+      project3 = Project.new({:title => 'Tony', :id => nil})
+      project3.save
+      expect(Project.search("tony")).to eq [project3]
+    end
+  end
+
   describe '.all' do
     it 'sort by title' do
       project1 = Project.new({:title => 'Jane', :id => nil})
