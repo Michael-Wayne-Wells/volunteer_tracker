@@ -1,0 +1,20 @@
+<% if @projects.any? %>
+<h3>Projects:</h3>
+<ul>
+  <% @projects.each do |project| %>
+  <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<h3>There are no projects with this title.</h3>
+<% end %>
+<% if @volunteers.any? %>
+<h3>Volunteers:</h3>
+<ul>
+  <% @volunteers.each do |volunteer| %>
+  <li><a href="/volunteers/<%= volunteer.id %>"><%= volunteer.name %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<h3>There are no volunteers with this name.</h3>
+<% end %>

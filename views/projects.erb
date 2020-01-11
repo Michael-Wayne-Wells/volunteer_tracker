@@ -1,9 +1,9 @@
-<form class="form-display" action="/projects" method="post">
-  <label>Create a new project:</label>
+<form class="form-display" action="/projects/search" method="get">
+  <label>Find a project:</label>
   <div class="form-field">
-    <input type="text" name="title" placeholder="title">  
+    <input type="text" name="search" placeholder="search">
   </div>
-  <button type="submit" class="btn btn-dark" name="button">Create Project</button>
+  <button type="submit" class="btn btn-dark" name="button">Search</button>
 </form>
 
 <% if @projects.any? %>
@@ -14,5 +14,12 @@
   <% end %>
   </ul>
   <% else %>
-    <p>There are no projects yet!</p>
+    <h3>There are no projects yet!</h3>
 <% end %>
+<form class="form-display" action="/projects" method="post">
+  <label>Create a new project:</label>
+  <div class="form-field">
+    <input type="text" name="title" placeholder="title">
+  </div>
+  <button type="submit" class="btn btn-dark" name="button">Create Project</button>
+</form>

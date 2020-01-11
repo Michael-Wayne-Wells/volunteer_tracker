@@ -7,15 +7,15 @@ require('pg')
 
 DB = PG.connect({:dbname => "volunteer_tracker"})
 also_reload('lib/**/*.rb')
-set :show_exceptions, false
+# set :show_exceptions, false
 
 get("/") do
   redirect to("/projects")
 end
 
-error 404,500 do
-  erb(:error)
-end
+# error 404,500 do
+#   erb(:error)
+# end
 
 get("/projects") do
   projects = Project.all
@@ -25,6 +25,17 @@ get("/projects") do
     @projects = []
   end
   erb(:projects)
+end
+
+get("/projects/search") do
+  search = params[:search]
+  if search =~ /^[a-z0-9\_\-]+$/i
+    @projects = Project.search(search)
+    @volunteers = Volunteer.search(search)
+    erb(:search)
+  else
+    erb(:error)
+  end
 end
 
 post("/projects") do
